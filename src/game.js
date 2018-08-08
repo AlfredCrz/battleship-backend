@@ -1,5 +1,6 @@
 const dbGame = []
 const idHelper = require('./IdHelper.js')
+const gameDB = require('../config/model-game.js')
 
 class Game {
 	constructor({cols = 10, rows = 10} = {}){
@@ -9,16 +10,24 @@ class Game {
 	static create({cols = 10, rows = 10} = {}) {
 		const game = new Game({cols,rows});
 		game.id = dbGame.length + 1;
-		game.playerId = idHelper();
+		game.playerIdOne = idHelper();
 		const token = idHelper();
 		game.token = token
 		dbGame.push(game);
+
 		game.session = `http://localhost:3000/game?token=${token}`;
+
+		gameDB.sync({force: false})
+		.then(function () {
+			return gameDB.create({
+				playerIdOne: game.playerIdOne,
+				token: game.token});
+		});
 
 		return Promise.resolve({
 			id : game.id, 
 			session : game.session,
-			playerId : game.playerId
+			playerIdOne : game.playerIdOne
 		})
 	}
 
@@ -29,7 +38,7 @@ class Game {
 		}
 		return Promise.resolve({
 			id : game.id,
-			playerId : idHelper()
+			playerIdOne : idHelper()
 		});
 	}
 }
