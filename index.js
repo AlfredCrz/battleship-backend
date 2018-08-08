@@ -1,10 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const sequelize = require('./config/configure.js')
+const Game = require('./src/game.js')
 const app = express()
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const Game = require('./src/game.js')
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/game',(req, res) => {
   Game.join(req.query.token)
