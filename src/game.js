@@ -17,18 +17,13 @@ class Game {
 
 		game.session = `http://localhost:3000/game?token=${token}`;
 
-		gameDB.sync({force: false})
-		.then(function () {
-			return gameDB.create({
-				playerIdOne: game.playerIdOne,
-				token: game.token});
-		});
-
-		return Promise.resolve({
-			id : game.id, 
-			session : game.session,
-			playerIdOne : game.playerIdOne
-		})
+		return gameDB.sync({force: false})
+			.then(function () {
+				gameDB.create({
+					playerOneId: game.playerOneId,
+					token: game.token
+				});
+			})
 	}
 
 	static join(token) {

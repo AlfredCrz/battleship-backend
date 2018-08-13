@@ -9,14 +9,14 @@ let Game = sequelize.define('Game', {
         autoIncrement: true,
         primaryKey: true
     },
-    playerIdOne: {
+    playerOneId: {
         type: Sequelize.STRING,
         allowNull: false,
-        field: 'playerIdOne'
+        field: 'playerOneId'
     },
-    playerIdTwo: {
+    playerTwoId: {
         type: Sequelize.STRING,
-        field: 'playerIdTwo'
+        field: 'playerTwoId'
     },
     token: {
     	type: Sequelize.STRING,

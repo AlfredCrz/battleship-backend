@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('dbBattleship', 'sa', 'a301193MC', {
+const Connection = new Sequelize('dbBattleship', 'sa', 'a301193MC', {
   host: 'localhost',
   dialect: 'mssql',
   pool: {
@@ -13,10 +13,10 @@ const sequelize = new Sequelize('dbBattleship', 'sa', 'a301193MC', {
 
 sequelize.authenticate()
 	.then(() => {
-	console.log('Connection has been established successfully.');
+	 console.log('Connection has been established successfully.');
 	})
 	.catch(err => {
-	console.error('Unable to connect to the database:', err);
+	 console.error('Unable to connect to the database:', err);
 });
 
-module.exports = sequelize;
+module.exports = Connection;
