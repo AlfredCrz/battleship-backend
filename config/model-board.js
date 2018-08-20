@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const connection = require('./connection.js')
 
-let Game = connection.define('Game', {
+let Board = connection.define('Board', {
     id: {
         type: Sequelize.INTEGER,
         field: 'id',
@@ -9,22 +9,24 @@ let Game = connection.define('Game', {
         autoIncrement: true,
         primaryKey: true
     },
-    playerOneId: {
+    idPlayer: {
         type: Sequelize.STRING,
         allowNull: false,
-        field: 'playerOneId'
+        field: 'idPlayer',
+
     },
-    playerTwoId: {
-        type: Sequelize.STRING,
-        field: 'playerTwoId'
-    },
-    token: {
-    	type: Sequelize.STRING,
+    rows: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-    	field: 'token'
+        field: 'rows'
+    },
+    columns: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        field: 'columns'
     }
 }, {
     freezeTableName: true
 });
  
-module.exports = Game;
+module.exports = Board;
