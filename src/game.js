@@ -17,7 +17,7 @@ class Game {
 		game.token = token
 
 		game.session = `http://localhost:3000/game?token=${token}`;
-		
+
 		return gameDB.sync({force: false})
 			.then(function () {
 				gameDB.create({
@@ -61,6 +61,17 @@ class Game {
 		return boardDB.findOne({ where: {idPlayer: playerId}})
 			.then(result => {
 			});
+	}
+
+	static join(token) {
+		const game = dbGame.find(game => game.token === token);
+		if(game === undefined) {
+			return Promise.reject()		
+		}
+		return Promise.resolve({
+			id : game.id,
+			playerIdOne : idHelper()
+		});
 	}
 }
 
