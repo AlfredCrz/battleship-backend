@@ -14,18 +14,25 @@ app.use(function(req, res, next) {
 
 Connection.authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    Game.createShip();
+    app.listen(3000, () => {
+      console.log('Connection has been established successfully.');
+      console.log('listening port 3000');
+    })
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
-});
+  });
 
 app.get('/game',(req, res) => {
+  console.log("entro aqui");
   Game.join(req.query.token)
   .then(game => {
       res.send(game)
     })
-  .catch(error => console.error(error));
+  .catch(error => {
+      res.send(error)
+    });
 })
 
 app.post('/game', (req, res) => {
@@ -33,20 +40,21 @@ app.post('/game', (req, res) => {
     .then(game => {
       res.send(game)
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      res.send(error)
+    });
 })
 
 app.put('/game/:gameId/player/:playerId/board', (req, res) => {
   const gameId = req.params.gameId;
   const playerId = req.params.playerId;
   const ships = req.body;
-  Game.putShip(gameId, playerId, ships)
+  Game.shipsOrder(gameId, playerId, ships)
     .then(game => {
       res.send(game)
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      res.send(error)
+    });
 })
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
-})
