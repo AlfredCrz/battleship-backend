@@ -9,6 +9,11 @@ let Game = connection.define('Game', {
         autoIncrement: true,
         primaryKey: true
     },
+    boardId: {
+        type: Sequelize.INTEGER,
+        field: 'boardId',
+        allowNull: false,
+    },
     playerOneId: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -19,9 +24,9 @@ let Game = connection.define('Game', {
         field: 'playerTwoId'
     },
     token: {
-    	type: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
-    	field: 'token'
+        field: 'token'
     }
 }, {
     freezeTableName: true

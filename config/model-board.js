@@ -9,12 +9,6 @@ let Board = connection.define('Board', {
         autoIncrement: true,
         primaryKey: true
     },
-    idPlayer: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        field: 'idPlayer',
-
-    },
     rows: {
         type: Sequelize.INTEGER,
         allowNull: false,
