@@ -9,6 +9,16 @@ let Position = connection.define('Position', {
         autoIncrement: true,
         primaryKey: true
     },
+    idPlayer: {
+        type: Sequelize.STRING,
+        field: 'idPlayer',
+        allowNull: false,
+    },
+    idGame: {
+        type: Sequelize.STRING,
+        field: 'idGame',
+        allowNull: false,
+    },
     positionX: {
         type: Sequelize.INTEGER,
         field: 'positionX',

@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
-const Connection = new Sequelize('dbBattleship', 'sa', 'a301193MC', {
+const Configure = require('./configure-connection.js');
+
+const Connection = new Sequelize(Configure.DB,Configure.USER,Configure.PASS, {
   host: 'localhost',
   dialect: 'mssql',
   pool: {
